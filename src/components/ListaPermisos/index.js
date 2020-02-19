@@ -4,7 +4,7 @@ import axios from 'axios';
 const ListaPermisos = (props) => {
         const [list, setList] = useState([]);
         useEffect(() => {
-                axios.get('https://restcountries.eu/rest/v2/all')
+                axios.get('https://localhost:44318/api/permisos')
                     .then(res => {
                         setList(res.data);
                     })
@@ -15,6 +15,7 @@ const ListaPermisos = (props) => {
                 <table>
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Tipo Permiso</th>
@@ -22,16 +23,17 @@ const ListaPermisos = (props) => {
                 </thead>
                 <tbody>
                   {list.length > 0 ? (
-                    list.map((user, index) => (
+                    list.map((item, index) => (
                       <tr key={index}>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{item.id}</td>
+                        <td>{item.nombre}</td>
+                        <td>{item.apellido}</td>
+                        <td>{item.tipoPermiso.descripcion}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={3}>No hay Permisos</td>
+                      <td colSpan={4}>No hay Permisos</td>
                     </tr>
                   )}
                 </tbody>
